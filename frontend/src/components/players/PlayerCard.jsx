@@ -7,7 +7,7 @@ function PlayerCard({ player, onClick }) {
 
   return (
     <div 
-      className="relative overflow-hidden cursor-pointer aspect-[3/4] shine-effect card-hover-scale"
+      className="relative overflow-hidden cursor-pointer aspect-[3/4] md:aspect-[3/4] shine-effect card-hover-scale"
       onClick={onClick}
     >
       {/* Imagen de fondo */}
@@ -22,7 +22,7 @@ function PlayerCard({ player, onClick }) {
         />
       ) : (
         <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#001450] to-[#000B1E] flex items-center justify-center">
-          <span className="text-6xl font-black text-white/10 uppercase">
+          <span className="text-4xl md:text-6xl font-black text-white/10 uppercase">
             {player.position?.slice(0, 2) || '?'}
           </span>
         </div>
@@ -32,22 +32,22 @@ function PlayerCard({ player, onClick }) {
       <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/40 to-transparent" />
 
       {/* Dorsal decorativo */}
-      <div className="absolute top-3 right-3 text-8xl font-black leading-none select-none pointer-events-none text-black/[0.07]">
+      <div className="absolute top-2 right-2 md:top-3 md:right-3 text-5xl md:text-8xl font-black leading-none select-none pointer-events-none text-black/[0.07]">
         {player.number}
       </div>
 
       {/* Área de información */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+      <div className="absolute bottom-0 left-0 right-0 p-2.5 md:p-4 z-10">
         {/* Posición • Equipo */}
-        <p className="text-xs uppercase tracking-widest mb-1 text-black/60">
+        <p className="text-[10px] md:text-xs uppercase tracking-widest mb-0.5 md:mb-1 text-black/60">
           {player.position} • {player.team?.shortName || player.team?.name || 'Sin equipo'}
         </p>
         {/* Nombre completo */}
-        <h3 className="text-xl font-bold leading-tight mb-1 text-black">
+        <h3 className="text-sm md:text-xl font-bold leading-tight mb-0.5 md:mb-1 text-black">
           {player.firstName} {player.lastName}
         </h3>
         {/* Nacionalidad • Edad */}
-        <p className="text-xs text-black/50">
+        <p className="text-[10px] md:text-xs text-black/50">
           {player.nationality} • {age} años
         </p>
       </div>

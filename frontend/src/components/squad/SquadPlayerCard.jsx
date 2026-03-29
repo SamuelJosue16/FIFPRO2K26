@@ -26,8 +26,9 @@ export default function SquadPlayerCard({ player, positionLabel, onRemove }) {
   const displayName = abbreviateName(player.firstName, player.lastName)
   const theme = getCardTheme(rating)
 
-  const W = 112
-  const H = 156
+  // Tamaños responsive: más pequeño en mobile
+  const W = typeof window !== 'undefined' && window.innerWidth < 768 ? 88 : 112
+  const H = typeof window !== 'undefined' && window.innerWidth < 768 ? 122 : 156
   const B = 4
 
   return (
@@ -37,7 +38,7 @@ export default function SquadPlayerCard({ player, positionLabel, onRemove }) {
         style={{
           width: `${W}px`,
           height: `${H}px`,
-          filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.9)) drop-shadow(0 2px 8px rgba(0,0,0,0.7))',
+          filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.9)) drop-shadow(0 2px 8px rgba(0,0,0,0.7))',
         }}
         onClick={onRemove}
       >
@@ -91,15 +92,15 @@ export default function SquadPlayerCard({ player, positionLabel, onRemove }) {
           />
 
           {/* Rating + posicion - esquina sup-izq */}
-          <div className="absolute top-2 left-2 leading-none z-10 flex flex-col gap-0.5">
+          <div className="absolute top-1.5 md:top-2 left-1.5 md:left-2 leading-none z-10 flex flex-col gap-0.5">
             <span
-              className="text-[22px] font-black leading-none"
+              className="text-lg md:text-[22px] font-black leading-none"
               style={{ color: ratingColor, textShadow: '0 2px 8px rgba(0,0,0,1)' }}
             >
               {rating}
             </span>
             <span
-              className="text-[9px] font-black uppercase leading-none tracking-wider"
+              className="text-[8px] md:text-[9px] font-black uppercase leading-none tracking-wider"
               style={{ color: ratingColor, textShadow: '0 1px 4px rgba(0,0,0,1)' }}
             >
               {positionLabel}
@@ -107,9 +108,9 @@ export default function SquadPlayerCard({ player, positionLabel, onRemove }) {
           </div>
 
           {/* Nombre - zona inferior */}
-          <div className="absolute bottom-0 left-0 right-0 px-1.5 pb-2 pt-1 z-10 text-center">
+          <div className="absolute bottom-0 left-0 right-0 px-1 md:px-1.5 pb-1.5 md:pb-2 pt-1 z-10 text-center">
             <p
-              className="text-white text-[10px] font-black uppercase tracking-wide truncate leading-none"
+              className="text-white text-[9px] md:text-[10px] font-black uppercase tracking-wide truncate leading-none"
               style={{ textShadow: '0 1px 4px rgba(0,0,0,1)' }}
             >
               {displayName}

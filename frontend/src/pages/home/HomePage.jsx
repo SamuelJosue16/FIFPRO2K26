@@ -142,12 +142,12 @@ function HomePage() {
             {STATS.map((stat, i) => (
               <div
                 key={stat.label}
-                className={`px-6 py-8 text-center ${i < STATS.length - 1 ? 'border-r border-white/8' : ''}`}
+                className={`px-3 md:px-6 py-6 md:py-8 text-center ${i < STATS.length - 1 ? 'border-r border-white/8' : ''}`}
               >
-                <p className="text-4xl md:text-5xl font-black text-white tracking-tight mb-1">
+                <p className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-1">
                   {stat.value}
                 </p>
-                <p className="text-xs uppercase tracking-widest text-white/35 font-medium">
+                <p className="text-[9px] md:text-xs uppercase tracking-widest text-white/35 font-medium">
                   {stat.label}
                 </p>
               </div>

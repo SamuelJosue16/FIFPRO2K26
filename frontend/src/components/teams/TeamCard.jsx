@@ -12,23 +12,23 @@ function TeamCard({ team, onClick }) {
 
   return (
     <div
-      className="relative overflow-hidden cursor-pointer aspect-[3/4] card-hover-scale"
+      className="relative overflow-hidden cursor-pointer aspect-[3/4] md:aspect-[3/4] card-hover-scale"
       onClick={onClick}
       style={{
         background: `radial-gradient(circle at 50% 40%, ${primaryGlow}, #000B1E 65%)`
       }}
     >
       {/* Logo centrado en la zona superior */}
-      <div className="absolute inset-0 flex items-center justify-center pb-20">
+      <div className="absolute inset-0 flex items-center justify-center pb-12 md:pb-20">
         {team.logoUrl ? (
           <img
             src={team.logoUrl}
             alt={`${team.name} logo`}
-            className="w-28 h-28 object-contain drop-shadow-2xl"
+            className="w-16 h-16 md:w-28 md:h-28 object-contain drop-shadow-2xl"
             loading="lazy"
           />
         ) : (
-          <span className="text-7xl opacity-20 select-none">
+          <span className="text-4xl md:text-7xl opacity-20 select-none">
             {team.shortName?.charAt(0) || '?'}
           </span>
         )}
@@ -38,14 +38,14 @@ function TeamCard({ team, onClick }) {
       <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/30 to-transparent" />
 
       {/* Texto del equipo en la parte inferior */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-        <p className="text-xs uppercase tracking-widest mb-1 font-mono text-black/50">
+      <div className="absolute bottom-0 left-0 right-0 p-2.5 md:p-4 z-10">
+        <p className="text-[10px] md:text-xs uppercase tracking-widest mb-0.5 md:mb-1 font-mono text-black/50">
           {team.country} · {team.shortName}
         </p>
-        <h3 className="text-lg font-black leading-tight mb-2 uppercase tracking-tight text-black">
+        <h3 className="text-xs md:text-lg font-black leading-tight mb-1 md:mb-2 uppercase tracking-tight text-black">
           {team.name}
         </h3>
-        <div className="flex items-center gap-4 text-[10px] uppercase tracking-wider text-black/35">
+        <div className="flex items-center gap-2 md:gap-4 text-[9px] md:text-[10px] uppercase tracking-wider text-black/35">
           <span>{team._count?.players || 0} jugadores</span>
           <span>{(team._count?.homeMatches || 0) + (team._count?.awayMatches || 0)} partidos</span>
         </div>
