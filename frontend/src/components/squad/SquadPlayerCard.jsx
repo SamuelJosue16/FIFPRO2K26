@@ -27,8 +27,8 @@ export default function SquadPlayerCard({ player, positionLabel, onRemove }) {
   const theme = getCardTheme(rating)
 
   // Tamaños responsive: más pequeño en mobile
-  const W = typeof window !== 'undefined' && window.innerWidth < 768 ? 88 : 112
-  const H = typeof window !== 'undefined' && window.innerWidth < 768 ? 122 : 156
+  const W = typeof window !== 'undefined' && window.innerWidth < 768 ? 56 : 112
+  const H = typeof window !== 'undefined' && window.innerWidth < 768 ? 75 : 156
   const B = 4
 
   return (

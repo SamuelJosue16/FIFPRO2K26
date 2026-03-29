@@ -39,15 +39,15 @@ function PlayerCard({ player, onClick }) {
       {/* Área de información */}
       <div className="absolute bottom-0 left-0 right-0 p-2.5 md:p-4 z-10">
         {/* Posición • Equipo */}
-        <p className="text-[10px] md:text-xs uppercase tracking-widest mb-0.5 md:mb-1 text-black/60">
+        <p className="text-xs md:text-sm uppercase tracking-widest mb-0.5 md:mb-1 text-black/60">
           {player.position} • {player.team?.shortName || player.team?.name || 'Sin equipo'}
         </p>
         {/* Nombre completo */}
-        <h3 className="text-sm md:text-xl font-bold leading-tight mb-0.5 md:mb-1 text-black">
+        <h3 className="text-base md:text-xl font-bold leading-tight mb-0.5 md:mb-1 text-black">
           {player.firstName} {player.lastName}
         </h3>
         {/* Nacionalidad • Edad */}
-        <p className="text-[10px] md:text-xs text-black/50">
+        <p className="text-xs md:text-sm text-black/50">
           {player.nationality} • {age} años
         </p>
       </div>

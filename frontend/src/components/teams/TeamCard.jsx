@@ -39,13 +39,13 @@ function TeamCard({ team, onClick }) {
 
       {/* Texto del equipo en la parte inferior */}
       <div className="absolute bottom-0 left-0 right-0 p-2.5 md:p-4 z-10">
-        <p className="text-[10px] md:text-xs uppercase tracking-widest mb-0.5 md:mb-1 font-mono text-black/50">
+        <p className="text-xs md:text-sm uppercase tracking-widest mb-0.5 md:mb-1 font-mono text-black/50">
           {team.country} · {team.shortName}
         </p>
-        <h3 className="text-xs md:text-lg font-black leading-tight mb-1 md:mb-2 uppercase tracking-tight text-black">
+        <h3 className="text-sm md:text-lg font-black leading-tight mb-1 md:mb-2 uppercase tracking-tight text-black">
           {team.name}
         </h3>
-        <div className="flex items-center gap-2 md:gap-4 text-[9px] md:text-[10px] uppercase tracking-wider text-black/35">
+        <div className="flex items-center gap-2 md:gap-4 text-[11px] md:text-xs uppercase tracking-wider text-black/35">
           <span>{team._count?.players || 0} jugadores</span>
           <span>{(team._count?.homeMatches || 0) + (team._count?.awayMatches || 0)} partidos</span>
         </div>
