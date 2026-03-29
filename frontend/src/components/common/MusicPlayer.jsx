@@ -3,7 +3,7 @@ import musicFile from '../../assets/PROJECT-THEME.mp3'
 
 export default function MusicPlayer() {
   const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [volume, setVolume] = useState(0.4)
   const [showVolume, setShowVolume] = useState(false)
 
