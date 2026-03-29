@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const { autoSeedIfEmpty } = require('./utils/autoSeed');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -62,7 +63,7 @@ app.use((err, req, res, next) => {
 });
 
 // Iniciar servidor
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`
 ╔═══════════════════════════════════════════════════╗
 ║  🏆 FIFPRO2K26 Backend Server                     ║
@@ -73,6 +74,8 @@ app.listen(PORT, () => {
 ║  ⭐ Status: Online                                 ║
 ╚═══════════════════════════════════════════════════╝
   `);
+  // Seed automático si la base de datos está vacía
+  await autoSeedIfEmpty();
 });
 
 module.exports = app;
