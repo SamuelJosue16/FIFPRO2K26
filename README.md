@@ -12,8 +12,9 @@ Aplicación web full stack para gestión de datos futbolísticos con temática *
 - **Runtime:** Node.js 18+
 - **Framework:** Express.js
 - **ORM:** Prisma
-- **Base de Datos:** SQLite
+- **Base de Datos:** PostgreSQL (Render/Railway)
 - **API Testing:** Bruno API Client
+- **Deployment:** Render.com (⭐ Recomendado) / Railway
 
 ### Frontend
 - **Framework:** React 18+
@@ -22,6 +23,16 @@ Aplicación web full stack para gestión de datos futbolísticos con temática *
 - **State Management:** TanStack Query (React Query)
 - **HTTP Client:** Axios
 - **Animaciones:** Framer Motion
+- **Deployment:** Netlify
+
+### DevOps
+- **Backend Hosting:** Render.com ⭐ (PostgreSQL + Express API) - 100% GRATIS, sin tarjeta
+  - Alternativa: Railway (PostgreSQL + Express API) - $5/mes gratis, requiere tarjeta
+- **Frontend Hosting:** 
+  - Netlify ⭐ (React SPA estático) - 100% GRATIS
+  - Vercel ⭐ (React SPA estático) - 100% GRATIS, Edge CDN más rápido
+- **CI/CD:** Auto-deploy desde GitHub
+- **Database:** PostgreSQL managed
 
 ---
 
@@ -97,7 +108,14 @@ PROYECTO FULLSTACK FIFPRO2K26/
 ---
 
 ## 📚 Documentación
+ 
+### Deployment
+- **[Guía de Deploy Render + Netlify](GUIA_DEPLOY_RENDER_NETLIFY.md)** ⭐ **RECOMENDADO** - 100% gratis
+- **[Guía de Deploy Railway + Netlify](GUIA_DEPLOY_RAILWAY_NETLIFY.md)** - Alternativa (requiere tarjeta)
+- **[Quickstart Deploy](QUICKSTART_DEPLOY.md)** - Referencia rápida de despliegue
+- **[Resumen de Cambios](RESUMEN_CAMBIOS_DEPLOY.md)** - Cambios técnicos para deployment
 
+### Desarrollo
 - **[Plan de Implementación](PLAN_IMPLEMENTACION.md)** - Roadmap completo de 8 fases
 - **[Contexto del Proyecto](contexto-proyecto.md)** - Stack, arquitectura y convenciones
 - **[Skills](skills/)** - Guías de buenas prácticas:
@@ -165,6 +183,90 @@ npm run dev
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
+
+---
+
+## 🌐 Deployment en Render/Railway + Netlify
+
+### Arquitectura de Producción
+
+#### Opción 1: Render + Netlify (⭐ Recomendado)
+- **Backend + Database**: Render.com (PostgreSQL + Express API)
+- **Frontend**: Netlify (React SPA estático)
+- **Costo**: $0/mes - 100% GRATIS, sin tarjeta
+- **Tradeoff**: Sleep mode después de 15 min de inactividad
+
+#### Opción 2: Railway + Netlify (Alternativa)
+- **Backend + Database**: Railway (PostgreSQL + Express API)
+- **Frontend**: Netlify (React SPA estático)
+- **Costo**: $5 gratis/mes - Requiere tarjeta de crédito
+- **Ventaja**: Sin sleep mode, más rápido
+
+### Guías de Despliegue
+
+📚 **Escoge tu plataforma:**
+
+**Backend:**
+- **[Guía Completa Render + Netlify](GUIA_DEPLOY_RENDER_NETLIFY.md)** ⭐ **RECOMENDADO** - 100% gratis, sin tarjeta
+- **[Guía Completa Render + Vercel](GUIA_DEPLOY_RENDER_VERCEL.md)** ⭐ **RECOMENDADO** - 100% gratis, CDN más rápido
+- **[Guía Completa Railway + Netlify](GUIA_DEPLOY_RAILWAY_NETLIFY.md)** - Alternativa (requiere tarjeta)
+
+**Recursos:**
+- **[Comparación de Plataformas](COMPARATIVA_PLATAFORMAS.md)** - Ver diferencias entre Render, Railway, Netlify, Vercel, etc.
+- **[Guía Rápida](QUICKSTART_DEPLOY.md)** - Referencia rápida de comandos
+- **[Resumen de Cambios](RESUMEN_CAMBIOS_DEPLOY.md)** - Qué se modificó para el deploy
+
+### Despliegue Rápido
+
+#### Opción A: Backend en Render (⭐ Recomendado)
+```bash
+# 1. Crear PostgreSQL database en Render.com (gratis, sin tarjeta)
+# 2. Crear Web Service desde GitHub
+# 3. Configurar Root Directory: backend
+# 4. Variables de entorno:
+#    - DATABASE_URL=<Internal Database URL>
+#    - NODE_ENV=production
+#    - JWT_SECRET=<generar con crypto>
+#    - CORS_ORIGIN=https://tu-app.netlify.app
+# 5. Deploy automático
+# ⚠️ Sleep mode después de 15 min inactividad
+```
+
+#### Opción B: Backend en Railway (Alternativa)
+```bash
+# 1. Crear PostgreSQL database en Railway ($5 gratis/mes, requiere tarjeta)
+# 2. Crear servicio desde GitHub
+# 3. Root path: backend
+# 4. Variables de entorno (igual que Render)
+# 5. Deploy automático
+# ✅ Sin sleep mode
+```
+
+#### Frontend en Netlify (Ambas opciones)
+```bash
+# 1. Crear sitio en Netlify.com (100% gratis)
+# 2. Conectar repo de GitHub
+# 3. Configurar build:
+#    - Base: frontend
+#    - Build: npm install && npm run build
+#    - Publish: frontend/dist
+# 4. Variable de entorno:
+#    - VITE_API_URL=<URL de tu backend en Render o Railway>
+# 5. Deploy automático
+```
+
+### URLs de Producción
+
+#### Si usas Render:
+- **Frontend:** `https://tu-app.netlify.app`
+- **Backend API:** `https://tu-app.onrender.com`
+- **Health Check:** `https://tu-app.onrender.com/api/health`
+- **⚠️ Nota:** Sleep mode tras 15 min inactividad (~30s wake-up)
+
+#### Si usas Railway:
+- **Frontend:** `https://tu-app.netlify.app`
+- **Backend API:** `https://tu-app.up.railway.app`
+- **Health Check:** `https://tu-app.up.railway.app/api/health`
 
 ---
 
