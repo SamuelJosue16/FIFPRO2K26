@@ -1,0 +1,59 @@
+### Matches Endpoints
+
+# Get All Matches
+GET http://localhost:3000/api/matches
+
+###
+
+# Get Match by ID
+GET http://localhost:3000/api/matches/1
+
+###
+
+# Get Finished Matches
+GET http://localhost:3000/api/matches?status=finished
+
+###
+
+# Get Scheduled Matches
+GET http://localhost:3000/api/matches?status=scheduled
+
+###
+
+# Create Match
+POST http://localhost:3000/api/matches
+Content-Type: application/json
+
+{
+  "homeTeamId": "TEAM_ID_1",
+  "awayTeamId": "TEAM_ID_2",
+  "date": "2026-04-15T20:00:00Z",
+  "venue": "Santiago Bernabéu",
+  "status": "scheduled",
+  "homeScore": null,
+  "awayScore": null,
+  "statistics": null
+}
+
+###
+
+# Update Match Score
+PUT http://localhost:3000/api/matches/MATCH_ID_AQUI
+Content-Type: application/json
+
+{
+  "homeScore": 2,
+  "awayScore": 1,
+  "status": "finished",
+  "statistics": {
+    "possession": "55-45",
+    "shots": "16-12",
+    "shotsOnTarget": "7-5",
+    "corners": "8-4"
+  }
+}
+
+###
+
+# Delete Match
+DELETE http://localhost:3000/api/matches/MATCH_ID_AQUI

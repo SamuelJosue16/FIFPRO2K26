@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// MODELO: Usuario del sistema
+// ============================================
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hash bcrypt
+  name      String
+  role      String   @default("user") // user, admin
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  squads    Squad[]
+
+  @@map("users")
+}
+
+// ============================================
+// MODELO: Alineación (Squad Builder)
+// ============================================
+model Squad {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  formation String   // "4-3-3", "4-2-3-1", "4-2-4"
+  positions String   // JSON: { "GK": "playerId", "LB": "playerId", ... }
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("squads")
+}
+
+// ============================================
+// MODELO: Equipo de la Champions League
+// ============================================
+model Team {
+  id        String   @id @default(uuid())
+  name      String   @unique // Real Madrid, Barcelona, etc.
+  shortName String   // RMA, BAR, etc.
+  country   String   // España, Inglaterra, etc.
+  colors    String   // JSON string: {"primary": "#FFFFFF", "secondary": "#000000"}
+  logoUrl   String?  // URL del escudo
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  players      Player[]
+  homeMatches  Match[]  @relation("HomeTeam")
+  awayMatches  Match[]  @relation("AwayTeam")
+
+  @@map("teams")
+}
+
+// ============================================
+// MODELO: Jugador
+// ============================================
+model Player {
+  id          String    @id @default(uuid())
+  firstName   String
+  lastName    String
+  position    String    // Portero, Defensa, Centrocampista, Delantero
+  number      Int       // Número de dorsal
+  nationality String
+  birthDate   DateTime
+  statistics  String?   // JSON string: {"goals": 10, "assists": 5, "matches": 20}
+  photoUrl    String?   // URL de la foto del jugador
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relación con equipo
+  teamId String
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@map("players")
+}
+
+// ============================================
+// MODELO: Partido
+// ============================================
+model Match {
+  id         String    @id @default(uuid())
+  homeScore  Int?      // null si no se ha jugado
+  awayScore  Int?      // null si no se ha jugado
+  date       DateTime
+  status     String    @default("scheduled") // scheduled, live, finished, postponed
+  venue      String    // Estadio
+  statistics String?   // JSON string: {"possession": "60-40", "shots": "15-10"}
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  // Relaciones con equipos
+  homeTeamId String
+  homeTeam   Team   @relation("HomeTeam", fields: [homeTeamId], references: [id], onDelete: Cascade)
+  
+  awayTeamId String
+  awayTeam   Team   @relation("AwayTeam", fields: [awayTeamId], references: [id], onDelete: Cascade)
+
+  @@map("matches")
+}

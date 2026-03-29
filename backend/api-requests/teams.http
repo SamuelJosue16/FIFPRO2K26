@@ -1,0 +1,48 @@
+### Teams Endpoints - FIFPRO2K26 UEFA Champions League
+
+# Get All Teams
+GET http://localhost:3000/api/teams
+
+###
+
+# Get Team by ID (usa un ID real de la base de datos)
+GET http://localhost:3000/api/teams/TEAM_ID_AQUI
+
+###
+
+# Create Team
+POST http://localhost:3000/api/teams
+Content-Type: application/json
+
+{
+  "name": "Inter Milan",
+  "shortName": "INT",
+  "country": "Italia",
+  "colors": {
+    "primary": "#0068A8",
+    "secondary": "#000000"
+  },
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg"
+}
+
+###
+
+# Update Team
+PUT http://localhost:3000/api/teams/TEAM_ID_AQUI
+Content-Type: application/json
+
+{
+  "name": "FC Internazionale Milano",
+  "shortName": "INTER"
+}
+
+###
+
+# Delete Team
+DELETE http://localhost:3000/api/teams/TEAM_ID_AQUI
+
+###
+
+# Delete Team
+DELETE http://localhost:3000/api/teams/1
+Authorization: Bearer {{token}}

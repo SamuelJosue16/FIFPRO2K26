@@ -1,0 +1,99 @@
+### Variables
+@baseUrl = http://localhost:3000/api
+@token = your_jwt_token_here
+
+###############################################
+# AUTENTICACIÓN - REGISTRO Y LOGIN
+###############################################
+
+### Registrar nuevo usuario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@fifpro.com",
+  "password": "Admin123!",
+  "name": "Admin User"
+}
+
+### Login de usuario
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@fifpro.com",
+  "password": "Admin123!"
+}
+
+### Registrar segundo usuario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "messi@champions.com",
+  "password": "barcelona123",
+  "name": "Lionel Messi"
+}
+
+###############################################
+# RUTAS PROTEGIDAS (requieren token)
+###############################################
+
+### Obtener perfil del usuario autenticado
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### Actualizar perfil
+PUT {{baseUrl}}/auth/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Admin FIFA"
+}
+
+### Cambiar contraseña
+PUT {{baseUrl}}/auth/change-password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "currentPassword": "Admin123!",
+  "newPassword": "NewAdmin2026!"
+}
+
+###############################################
+# PRUEBAS DE ERRORES
+###############################################
+
+### Error: Email ya registrado
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@fifpro.com",
+  "password": "test123",
+  "name": "Test User"
+}
+
+### Error: Credenciales inválidas
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@fifpro.com",
+  "password": "wrongpassword"
+}
+
+### Error: Token no proporcionado
+GET {{baseUrl}}/auth/me
+
+### Error: Formato de email inválido
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "invalid-email",
+  "password": "test123",
+  "name": "Test User"
+}

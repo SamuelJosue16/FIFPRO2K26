@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* UEFA Champions League Theme - Global Styles */
+
+@layer base {
+  body {
+    @apply bg-uefa-background text-white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+      'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* ════════════════════════════════════════════
+     EFECTOS DE BRILLO DIAGONAL (SHIMMER)
+  ════════════════════════════════════════════ */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 35%,
+      rgba(255, 255, 255, 0.14) 50%,
+      rgba(255, 255, 255, 0.04) 65%,
+      transparent 100%
+    );
+    transform: skewX(-12deg);
+    transition: left 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .shine-effect:hover::before {
+    left: 150%;
+  }
+
+  .shine-effect-gold::before {
+    background: linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 35%,
+      rgba(255, 255, 255, 0.30) 50%,
+      rgba(255, 255, 255, 0.08) 65%,
+      transparent 100%
+    );
+  }
+
+  /* ════════════════════════════════════════════
+     ESCALA SUTIL PARA CARDS
+  ════════════════════════════════════════════ */
+  .card-hover-scale {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover-scale:hover {
+    transform: scale(1.025);
+  }
+
+  /* ════════════════════════════════════════════
+     NAVEGACIÓN CON LÍNEA INFERIOR ANIMADA
+  ════════════════════════════════════════════ */
+  .nav-link {
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #E5E7EB;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* ════════════════════════════════════════════
+     BOTONES UEFA (SIN BORDER RADIUS)
+  ════════════════════════════════════════════ */
+  .btn-uefa-primary {
+    @apply bg-white text-black font-bold py-2 px-6
+           hover:bg-gray-200 active:scale-95
+           transition-all duration-300 shadow-lg
+           hover:shadow-xl;
+  }
+
+  .btn-uefa-secondary {
+    @apply bg-uefa-blue text-white font-semibold py-2 px-6
+           border-2 border-uefa-light-blue
+           hover:bg-uefa-light-blue active:scale-95
+           transition-all duration-300;
+  }
+
+  .btn-uefa-ghost {
+    @apply bg-transparent text-white font-semibold py-2 px-6
+           border-2 border-white
+           hover:bg-white hover:text-black active:scale-95
+           transition-all duration-300;
+  }
+
+  /* ════════════════════════════════════════════
+     CARDS UEFA (SIN BORDER RADIUS)
+  ════════════════════════════════════════════ */
+  .card-uefa {
+    @apply bg-gradient-to-br from-uefa-dark to-uefa-blue
+           p-6 shadow-uefa-md hover:shadow-uefa-lg
+           transition-all duration-300
+           border border-uefa-blue/30 shine-effect;
+  }
+
+  /* ════════════════════════════════════════════
+     INPUTS UEFA (SIN BORDER RADIUS)
+  ════════════════════════════════════════════ */
+  .input-uefa {
+    @apply w-full px-4 py-2
+           bg-uefa-dark border-2 border-uefa-blue
+           text-white placeholder-gray-400
+           focus:outline-none focus:border-white
+           transition-colors duration-300;
+  }
+
+  /* Container UEFA */
+  .container-uefa {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Gradiente de fondo UEFA */
+  .bg-uefa-gradient {
+    @apply bg-gradient-to-br from-uefa-dark via-uefa-blue to-uefa-dark;
+  }
+
+  /* Text gradient */
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Animación de estrellas */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Glow effect */
+  .glow-gold {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
+                 0 0 20px rgba(255, 215, 0, 0.3),
+                 0 0 30px rgba(255, 215, 0, 0.2);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 15px rgba(0, 102, 204, 0.5),
+                0 0 30px rgba(0, 102, 204, 0.3);
+  }
+
+  /* Shimmer effect para loading */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .shimmer {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(
+      to right,
+      #001D3D 0%,
+      #003F88 50%,
+      #001D3D 100%
+    );
+    background-size: 1000px 100%;
+  }
+
+  /* Scrollbar UEFA themed */
+  .scrollbar-uefa::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-uefa::-webkit-scrollbar-track {
+    background: #001D3D;
+  }
+
+  .scrollbar-uefa::-webkit-scrollbar-thumb {
+    background: #003F88;
+    border-radius: 4px;
+  }
+
+  .scrollbar-uefa::-webkit-scrollbar-thumb:hover {
+    background: #0066CC;
+  }
+}

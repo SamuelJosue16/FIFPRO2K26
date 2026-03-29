@@ -1,0 +1,56 @@
+### Players Endpoints
+
+# Get All Players
+GET http://localhost:3000/api/players
+
+###
+
+# Get Player by ID
+GET http://localhost:3000/api/players/1
+
+###
+
+# Get Players by Team
+GET http://localhost:3000/api/players?teamId=1
+
+###
+
+# Create Player
+POST http://localhost:3000/api/players
+Content-Type: application/json
+
+{
+  "firstName": "Luka",
+  "lastName": "Modrić",
+  "position": "Centrocampista",
+  "number": 10,
+  "teamId": "TEAM_ID_AQUI",
+  "nationality": "Croacia",
+  "birthDate": "1985-09-09",
+  "statistics": {
+    "goals": 4,
+    "assists": 9,
+    "matches": 35
+  },
+  "photoUrl": null
+}
+
+###
+
+# Update Player
+PUT http://localhost:3000/api/players/PLAYER_ID_AQUI
+Content-Type: application/json
+
+{
+  "number": 11,
+  "statistics": {
+    "goals": 5,
+    "assists": 10,
+    "matches": 36
+  }
+}
+
+###
+
+# Delete Player
+DELETE http://localhost:3000/api/players/PLAYER_ID_AQUI
