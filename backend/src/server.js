@@ -25,6 +25,7 @@ const teamRoutes = require('./routes/teamRoutes');
 const playerRoutes = require('./routes/playerRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const squadRoutes = require('./routes/squadRoutes');
+const seedRoutes = require('./routes/seedRoutes');
 
 // Rutas API
 app.use('/api/auth', authRoutes);
@@ -32,6 +33,7 @@ app.use('/api/teams', teamRoutes);
 app.use('/api/players', playerRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/squads', squadRoutes);
+app.use('/api/seed', seedRoutes);
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
