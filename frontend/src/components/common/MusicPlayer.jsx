@@ -10,11 +10,31 @@ export default function MusicPlayer() {
   useEffect(() => {
     const audio = audioRef.current
     audio.volume = volume
-    audio.loop = true
-    const playPromise = audio.play()
-    if (playPromise !== undefined) {
-      playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false))
+    
+    // Intentar reproducir automáticamente
+    const playAudio = async () => {
+      try {
+        await audio.play()
+        setIsPlaying(true)
+      } catch (error) {
+        // Si el navegador bloquea el autoplay, intentar en el primer click/toque
+        setIsPlaying(false)
+        const handleFirstInteraction = async () => {
+          try {
+            await audio.play()
+            setIsPlaying(true)
+            document.removeEventListener('click', handleFirstInteraction)
+            document.removeEventListener('touchstart', handleFirstInteraction)
+          } catch (e) {
+            console.log('Autoplay bloqueado por el navegador')
+          }
+        }
+        document.addEventListener('click', handleFirstInteraction, { once: true })
+        document.addEventListener('touchstart', handleFirstInteraction, { once: true })
+      }
     }
+    
+    playAudio()
   }, [])
 
   const togglePlay = () => {
@@ -35,7 +55,7 @@ export default function MusicPlayer() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[200] flex items-center gap-2">
-      <audio ref={audioRef} src={musicFile} preload="auto" />
+      <audio ref={audioRef} src={musicFile} preload="auto" autoPlay loop />
 
       {/* Volume panel */}
       {showVolume && (
